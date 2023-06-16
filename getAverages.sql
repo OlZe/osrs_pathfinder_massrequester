@@ -1,4 +1,5 @@
 SELECT
+    AVG("Dijkstra / ArrayQueue: cost") AS "AVG(cost)",
     AVG("Dijkstra / PriorityQueue: computeTimeMs"),
     AVG("Dijkstra / BucketQueue: computeTimeMs"),
     AVG("Dijkstra / ArrayQueue: computeTimeMs"),

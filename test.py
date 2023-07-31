@@ -28,6 +28,7 @@ def requestRandomPathAllAlgorithms(algorithms):
         response = requestRandomPathForAlgorithm(startCoordinate, endCoordinate, algorithm)
         data[algorithm + ": cost"] = response["totalCost"] if response["pathFound"] else -1
         data[algorithm + ": computeTimeMs"] = response["computeTimeMs"]
+        data[algorithm + ": expandedVertices"] = response["amountExpandedVertices"]
     
     return data
 
@@ -41,26 +42,36 @@ def insertDataIntoDb(dbConn, data):
         data["end"]["z"],
         data["Dijkstra / PriorityQueue: cost"],
         data["Dijkstra / PriorityQueue: computeTimeMs"],
+        data["Dijkstra / PriorityQueue: expandedVertices"],
         data["Dijkstra / BucketQueue: cost"],
         data["Dijkstra / BucketQueue: computeTimeMs"],
+        data["Dijkstra / BucketQueue: expandedVertices"],
         data["Dijkstra / ArrayQueue: cost"],
         data["Dijkstra / ArrayQueue: computeTimeMs"],
+        data["Dijkstra / ArrayQueue: expandedVertices"],
         data["Dijkstra-Backwards / PriorityQueue: cost"],
         data["Dijkstra-Backwards / PriorityQueue: computeTimeMs"],
+        data["Dijkstra-Backwards / PriorityQueue: expandedVertices"],
         data["Dijkstra-Backwards / BucketQueue: cost"],
         data["Dijkstra-Backwards / BucketQueue: computeTimeMs"],
+        data["Dijkstra-Backwards / BucketQueue: expandedVertices"],
         data["Dijkstra-Backwards / ArrayQueue: cost"],
         data["Dijkstra-Backwards / ArrayQueue: computeTimeMs"],
+        data["Dijkstra-Backwards / ArrayQueue: expandedVertices"],
         data["BFS / UnweightedQueue: cost"],
         data["BFS / UnweightedQueue: computeTimeMs"],
+        data["BFS / UnweightedQueue: expandedVertices"],
         data["BFS-Backwards / UnweightedQueue: cost"],
         data["BFS-Backwards / UnweightedQueue: computeTimeMs"],
+        data["BFS-Backwards / UnweightedQueue: expandedVertices"],
         data["BFS-MeetInMiddle / UnweightedQueue: cost"],
         data["BFS-MeetInMiddle / UnweightedQueue: computeTimeMs"],
+        data["BFS-MeetInMiddle / UnweightedQueue: expandedVertices"],
         data["BFS-MeetAtTeleport / UnweightedQueue: cost"],
-        data["BFS-MeetAtTeleport / UnweightedQueue: computeTimeMs"]
+        data["BFS-MeetAtTeleport / UnweightedQueue: computeTimeMs"],
+        data["BFS-MeetAtTeleport / UnweightedQueue: expandedVertices"]
     )
-    dbConn.cursor().execute("INSERT INTO benchmarks VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);", variables)
+    dbConn.cursor().execute("INSERT INTO benchmarks VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);", variables)
     dbConn.commit()
 
 
